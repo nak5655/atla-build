@@ -1,0 +1,37 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Atla.BuildSystem
+{
+    public enum Severity {
+        | Error
+        | Warning
+        | Info
+    }
+    
+    class BuildProblem
+    {
+        mutable severity: Severity;
+        mutable message: string;
+        
+        public this(severity: Severity, message: string) {
+            this.severity = severity;
+            this.message = message;
+        }
+        
+        override public ToString(): string {
+            def sb = System.Text.StringBuilder();
+            
+            _ = sb.Append($"$severity: ");
+            _ = sb.AppendLine(message);
+            
+            sb.ToString()
+        }
+    }
+}

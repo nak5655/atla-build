@@ -1,0 +1,10 @@
+﻿Usage: atla <command>
+
+Options:
+  -v, --version               output the version number
+  -h, --help                  display help for command
+
+Commands:
+  build [options]             Build current project
+  clean [options]             Clean current project
+  run [options]               Run current project

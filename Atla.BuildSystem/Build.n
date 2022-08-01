@@ -1,0 +1,48 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+
+using Atla.Lang;
+using Atla.Lang.Hir;
+
+namespace Atla.BuildSystem
+{
+
+    public class Build
+    {
+        targetDir: string;
+        srcDir: string;
+        outDir: string;
+      
+        public this(targetDir: string) {
+            this.targetDir = targetDir;
+            this.srcDir = Path.Combine(targetDir, "src");
+            this.outDir = Path.Combine(targetDir, "out");
+        }
+      
+        public tryBuild(): void {
+            def projectName = Path.GetFileName(targetDir);
+            def outFile = Path.Combine(outDir, $"$projectName.exe"); // TODO ビルド設定読み込み
+            def asm = Atla.Lang.Hir.Assembly(projectName, outFile);
+            
+            def compiler = Compiler(problem => Console.Write(problem.ToString()));
+            
+            // モジュール階層
+            foreach (entry in DirectoryInfo(srcDir).EnumerateFiles("*.atla", SearchOption.AllDirectories)) {
+                def code = File.ReadAllText(entry.FullName);
+                
+                // TODO モジュールパスを考慮
+                _ = compiler.updateModule(asm, entry.Name, code);
+            }
+            
+            compiler.compile(asm);
+        }
+    }
+}
