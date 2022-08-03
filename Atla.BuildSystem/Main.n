@@ -11,6 +11,7 @@ using System.IO;
 
 using Atla.Lang.Parser;
 using Atla.BuildSystem;
+using Atla.BuildSystem.Commands;
 
 module Program
 {
@@ -22,11 +23,12 @@ module Program
         }
         
         def targetDir = if (args.Length > 1) args[1] else Directory.GetCurrentDirectory();
+        def config = Config(targetDir);
         
         match (args.First()) {
-            | "build" => build(targetDir);
-            | "clean" => clean(targetDir);
-            | "run" => run(targetDir);
+            | "build" => _ = Build(config).execute();
+            | "clean" => _ = Clean(config).execute();
+            | "run" => _ = Run(config).execute();
             | _ => help();
         }
     }
@@ -37,17 +39,5 @@ module Program
     
     help(): void {
         Console.Write(File.ReadAllText(getResFilePath("Help.txt")));
-    }
-    
-    build(targetDir: string): void {
-        def problems = Build(targetDir).tryBuild();
-    }
-    
-    clean(rootDir: string): void {
-        WriteLine($"Clean $rootDir !")
-    }
-    
-    run(rootDir: string): void {
-        WriteLine($"Run $rootDir !")
     }
 }

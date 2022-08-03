@@ -1,0 +1,47 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+
+using Atla.Lang;
+using Atla.Lang.Hir;
+
+namespace Atla.BuildSystem
+{
+    public class Build
+    {
+        config: Config;
+        
+        public this(config: Config) {
+            this.config = config;
+        }
+      
+        public execute(): bool {
+            def asm = Atla.Lang.Hir.Assembly(config.projectName(), config.outFile());
+            
+            mutable foundError = false;
+            def compiler = Compiler(problem => {
+                foundError = foundError || (problem.severity == Severity.Error);
+                Console.Write(problem.ToString())
+            });
+            
+            // モジュール階層
+            foreach (entry in DirectoryInfo(config.srcDir).EnumerateFiles("*.atla", SearchOption.AllDirectories)) {
+                def code = File.ReadAllText(entry.FullName);
+                
+                // TODO モジュールパスを考慮
+                _ = compiler.updateModule(asm, entry.Name, code);
+            }
+            
+            compiler.compile(asm);
+            
+            foundError
+        }
+    }
+}

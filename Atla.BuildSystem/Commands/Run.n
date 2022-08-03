@@ -1,0 +1,49 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Imperative;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO.File;
+using System.IO.Path;
+using System.Diagnostics;
+using System.Console;
+
+namespace Atla.BuildSystem.Commands
+{
+    public class Run
+    {
+        config: Config;
+        
+        public this(config: Config) {
+            this.config = config;
+        }
+      
+        public execute(): bool {
+            def exeFile = config.outFile(); // TODO Lib
+            
+            when (!System.IO.File.Exists(exeFile)) {
+                WriteLine($"$exeFile does not exist.");
+                return false;
+            }
+            
+            def p = Process();
+            def info = ProcessStartInfo(exeFile);
+            info.RedirectStandardInput = true;
+            info.RedirectStandardOutput = true;
+            info.UseShellExecute = false;
+            p.StartInfo = info;
+            _ = p.Start();
+            
+            // 出力をリダイレクト
+            def reader = p.StandardOutput;
+            Write(reader.ReadToEnd());
+            p.WaitForExit();
+            
+            true
+        }
+    }
+}

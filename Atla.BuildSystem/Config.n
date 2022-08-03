@@ -1,0 +1,33 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+
+namespace Atla.BuildSystem
+{
+    public class Config
+    {
+        public targetDir: string;
+        public srcDir: string;
+        public outDir: string;
+        
+        public this(targetDir: string) {
+            this.targetDir = targetDir;
+            this.srcDir = Path.Combine(targetDir, "src");
+            this.outDir = Path.Combine(targetDir, "out");
+        }
+        
+        public projectName(): string {
+            Path.GetFileName(targetDir);
+        }
+        
+        public outFile(): string {
+            Path.Combine(outDir, $"$(projectName()).exe"); // TODO ビルド設定読み込み
+        }
+    }
+}

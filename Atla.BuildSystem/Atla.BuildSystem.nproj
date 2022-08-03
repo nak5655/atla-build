@@ -29,7 +29,7 @@
     <WarningLevel>4</WarningLevel>
     <StartProgram />
     <WorkingDirectory />
-    <CmdArgs>build C:\Users\tatsu\source\repos\vscode-atla\temp</CmdArgs>
+    <CmdArgs>run C:\Users\tatsu\source\repos\vscode-atla\temp</CmdArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -64,16 +64,26 @@
     </MacroReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Build.n">
+    <Compile Include="BuildProblem.n">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BuildProblem.n">
+    <Compile Include="Commands\Build.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\Clean.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\Run.n">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Config.n">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Main.n" />
     <Compile Include="Properties\AssemblyInfo.n" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commands" />
     <Folder Include="res" />
     <Folder Include="Properties\" />
   </ItemGroup>
