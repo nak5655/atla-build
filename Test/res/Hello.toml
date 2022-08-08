@@ -1,0 +1,5 @@
+﻿[package]
+name = "Hello"
+
+[bin]
+type = "exe"

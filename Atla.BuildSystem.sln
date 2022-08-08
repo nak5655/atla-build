@@ -10,6 +10,11 @@ Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "Atla.BuildSystem", "Atla.Bu
 EndProject
 Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "Atla.Lang", "..\atla-lang\Atla.Lang\Atla.Lang.nproj", "{36EE31AD-C404-4F33-A3E5-887D27F3BED0}"
 EndProject
+Project("{EDCC3B85-0BAD-11DB-BC1A-00112FDE8B61}") = "Test", "Test\Test.nproj", "{088558F9-5881-419C-A0F3-69BDC814768B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{877DCC31-1587-4FED-8444-F83A6C39508C} = {877DCC31-1587-4FED-8444-F83A6C39508C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,10 @@ Global
 		{36EE31AD-C404-4F33-A3E5-887D27F3BED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36EE31AD-C404-4F33-A3E5-887D27F3BED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36EE31AD-C404-4F33-A3E5-887D27F3BED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088558F9-5881-419C-A0F3-69BDC814768B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088558F9-5881-419C-A0F3-69BDC814768B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088558F9-5881-419C-A0F3-69BDC814768B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088558F9-5881-419C-A0F3-69BDC814768B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,7 +23,7 @@ module Program
         }
         
         def targetDir = if (args.Length > 1) args[1] else Directory.GetCurrentDirectory();
-        def config = Config(targetDir);
+        def config = Config.from(System.IO.Path.Combine(targetDir, "Atla.toml"));
         
         match (args.First()) {
             | "build" => _ = Build(config).execute();
