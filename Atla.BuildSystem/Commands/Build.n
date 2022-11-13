@@ -24,6 +24,7 @@ namespace Atla.BuildSystem
       
         public execute(): bool {
             def asm = Atla.Lang.Hir.Assembly(config.projectName(), config.outFile());
+            asm.scope = Atla.Lang.Hir.Scope.Assembly(Atla.Lang.Hir.Scope.Global(), asm.name);
             
             mutable foundError = false;
             def compiler = Compiler(problem => {
